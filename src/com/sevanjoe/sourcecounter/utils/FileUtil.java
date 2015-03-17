@@ -187,7 +187,7 @@ public class FileUtil {
                     ++emptyLineCount;
                 }
             }
-            return lineNumberReader.getLineNumber() + 1 - emptyLineCount;
+            return lineNumberReader.getLineNumber() - emptyLineCount;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -247,7 +247,7 @@ public class FileUtil {
                     ++emptyLineCount;
                 }
             }
-            return lineNumberReader.getLineNumber() + 1 - emptyLineCount;
+            return lineNumberReader.getLineNumber() - emptyLineCount;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
