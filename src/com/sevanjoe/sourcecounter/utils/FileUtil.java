@@ -137,11 +137,131 @@ public class FileUtil {
      * read the specified line content of text file
      *
      * @param filePathAndName String file name with absolute path
-     * @param lineIndex        index of the line
+     * @param lineIndex       index of the line
      * @return String text content of the line
      */
     public static String readLine(String filePathAndName, long lineIndex) {
         return readLine(filePathAndName, lineIndex, "UTF-8");
+    }
+
+    /**
+     * get the line count of text file
+     * @param filePathAndName String file name with absolute path
+     * @return the line count
+     */
+    public static int getLineCount(String filePathAndName) {
+        LineNumberReader lineNumberReader = null;
+        try {
+            lineNumberReader = new LineNumberReader(new FileReader(filePathAndName));
+            lineNumberReader.skip(new File(filePathAndName).getTotalSpace());
+            return lineNumberReader.getLineNumber() + 1;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (null != lineNumberReader) {
+                try {
+                    lineNumberReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * get the line count of text file without empty lines
+     * @param filePathAndName String file name with absolute path
+     * @return the line count
+     */
+    public static int getLineCountNoEmpty(String filePathAndName) {
+        LineNumberReader lineNumberReader = null;
+        try {
+            lineNumberReader = new LineNumberReader(new FileReader(filePathAndName));
+            String line;
+            int emptyLineCount = 0;
+            while (null != (line = lineNumberReader.readLine())) {
+                if (line.equals("")) {
+                    ++emptyLineCount;
+                }
+            }
+            return lineNumberReader.getLineNumber() + 1 - emptyLineCount;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (null != lineNumberReader) {
+                try {
+                    lineNumberReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * get the line count of text file
+     * @param file the file to be counted
+     * @return the line count
+     */
+    public static int getLineCount(File file) {
+        LineNumberReader lineNumberReader = null;
+        try {
+            lineNumberReader = new LineNumberReader(new FileReader(file));
+            lineNumberReader.skip(file.getTotalSpace());
+            return lineNumberReader.getLineNumber() + 1;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (null != lineNumberReader) {
+                try {
+                    lineNumberReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * get the line count of the text file without empty line
+     * @param file the file to be counted
+     * @return the line count
+     */
+    public static int getLineCountNoEmpty(File file) {
+        LineNumberReader lineNumberReader = null;
+        try {
+            lineNumberReader = new LineNumberReader(new FileReader(file));
+            String line;
+            int emptyLineCount = 0;
+            while (null != (line = lineNumberReader.readLine())) {
+                if (line.equals("")) {
+                    ++emptyLineCount;
+                }
+            }
+            return lineNumberReader.getLineNumber() + 1 - emptyLineCount;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (null != lineNumberReader) {
+                try {
+                    lineNumberReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return 0;
     }
 
     /**
