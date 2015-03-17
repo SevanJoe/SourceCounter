@@ -47,7 +47,7 @@ public class Main {
             }
             String resPath = PATH_PROJECT + File.separator + PATH_RES;
             if (FileUtil.isExistNotCreate(resPath)) {
-                List<File> resFileList = FileUtil.getAllFiles(resPath);
+                List<File> resFileList = FileUtil.getAllFiles(resPath, SUFFIX_RES);
                 System.out.println("Total Resource File Count: " + resFileList.size());
                 int resTotalCount = 0;
                 int resNoEmptyTotalCount = 0;
